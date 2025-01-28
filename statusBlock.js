@@ -1,3 +1,5 @@
+import { getData } from './dataProvider.js'
+
 const STYLE_CONTENT = `
     .status-container {
         margin: 2em;
@@ -54,7 +56,7 @@ class StatusBlock extends HTMLElement {
         shadow.appendChild(style)
 
         const name = this.getAttribute('name')
-        const data = await this.fetchData(name)
+        const data = await getData(name)
 
         const content = document.createElement('div')
         content.classList ='status-container'
@@ -70,15 +72,6 @@ class StatusBlock extends HTMLElement {
         content.insertAdjacentElement('beforeEnd', statusContainer)
 
         shadow.appendChild(content)
-    }
-
-    async fetchData(name) {
-        const response = await fetch('data.json')
-        if (!response.ok) {
-            throw new Error(response)
-        }
-        const data = await response.json()
-        return data[name]
     }
 
     dataToListOfAvailabilityElements(data) {
