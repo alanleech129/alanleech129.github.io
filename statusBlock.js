@@ -21,6 +21,23 @@ const STYLE_CONTENT = `
         &.unavailable {
             background-color: red;
         }
+
+        .availability-details {
+            display: none;
+        }
+
+        &:hover .availability-details {
+            display: inline-block;
+            position: relative;
+            top: 3em;
+            padding: 0.5em;
+            border: solid black 1px;
+            text-wrap-mode: nowrap;
+
+            p {
+                margin: 0;
+            }
+        }
     }
 
     .availability-date {
@@ -71,6 +88,12 @@ class StatusBlock extends HTMLElement {
                 const block = document.createElement('div')
                 const status = data[time]
                 block.classList = `availability-block ${status}`
+
+                const details = document.createElement('div')
+                details.classList = 'availability-details'
+                details.innerHTML = `<p>${time}</p><p>${status}</p>`
+                block.insertAdjacentElement('beforeEnd', details)
+
                 return block
             })
     }
