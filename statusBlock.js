@@ -35,6 +35,7 @@ const STYLE_CONTENT = `
             padding: 0.5em;
             border: solid black 1px;
             text-wrap-mode: nowrap;
+            background: white;
 
             p {
                 margin: 0;
