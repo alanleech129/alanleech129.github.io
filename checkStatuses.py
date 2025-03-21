@@ -33,7 +33,7 @@ def combineData(currentData, newData):
 
 def writeDataFile(combinedData):
     with open('data.json', 'w', encoding = 'utf-8') as f:
-        json.dump(combinedData, f)
+        json.dump(combinedData, f, indent=2)
 
 
 currentData = readCurrentData()
