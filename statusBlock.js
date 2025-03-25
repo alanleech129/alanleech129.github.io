@@ -67,7 +67,7 @@ class StatusBlock extends HTMLElement {
         const statusContainer = document.createElement('div')
         statusContainer.classList = 'availability-container'
 
-        this.dataToListOfAvailabilityElements(data)
+        this.dataToListOfAvailabilityElements(data.fineGrainedData)
             .forEach(block => statusContainer.insertAdjacentElement('beforeEnd', block))
 
         content.insertAdjacentElement('beforeEnd', statusContainer)
