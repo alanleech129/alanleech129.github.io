@@ -27,7 +27,7 @@ function combineData(existingData, newData, nowUnformatted) {
     const combined = {...existingData}
 
     const now = nowUnformatted.toISOString().substring(0, 16)
-    for (let namespace of Object.keys(newData)) {
+    for (let namespace in newData) {
         combined[namespace] = combineDataForNamespace(combined[namespace], newData[namespace], now)
     }
 

@@ -1,54 +1,49 @@
 const FIVE_MINUTES_IN_MS = 300000
 
-function normalise(input, now) {
+function normalise(data, now) {
+    const copyToNormalise = deepCopy(data)
+
     const nowIso8601Minutes = formatIsoMinutes(now)
-    const output = {}
-    for (let namespace of Object.keys(input)) {
-        output[namespace] = normaliseNamespace(input[namespace], nowIso8601Minutes)
+    for (let namespace of Object.keys(copyToNormalise)) {
+        normaliseNamespace(copyToNormalise[namespace], nowIso8601Minutes)
     }
-    return output
+    return copyToNormalise
 }
 
-function normaliseNamespace(input, now) {
-    return fillInMissingTimestampsAsUnavailable(input, now)
+function normaliseNamespace(data, now) {
+    fillInMissingTimestampsAsUnavailable(data, now)
 }
 
-function fillInMissingTimestampsAsUnavailable(input, now) {
-    const output = {
-        earliestFineGrainedData: input.earliestFineGrainedData,
-        fineGrainedData: {...input.fineGrainedData}
-    }
+function fillInMissingTimestampsAsUnavailable(data, now) {
+    const {earliestDataExpected, fineGrainedData} = data
 
-    const earliestDataExpected = output.earliestFineGrainedData
-    const earliestDataActuallyAvailable = Object.keys(output.fineGrainedData).sort()[0]
+    const earliestDataActuallyAvailable = Object.keys(fineGrainedData).sort()[0]
     if (differenceInMs(earliestDataExpected, earliestDataActuallyAvailable) > FIVE_MINUTES_IN_MS) {
         // Data is missing from the start. Mark as 'unavailable' at the expected start time.
-        output.fineGrainedData[earliestDataExpected] = 'unavailable'
+        fineGrainedData[earliestDataExpected] = 'unavailable'
     }
 
     const latestRequiredDataDate = new Date(now)
     latestRequiredDataDate.setMinutes(latestRequiredDataDate.getMinutes() - 10)
     const latestRequiredData = nextRound5Minutes(latestRequiredDataDate).toISOString().substring(0, 16)
-    const mostRecentDataActuallyAvailable = Object.keys(output.fineGrainedData).sort().reverse()[0]
+    const mostRecentDataActuallyAvailable = Object.keys(fineGrainedData).sort().reverse()[0]
 
     if (differenceInMs(mostRecentDataActuallyAvailable, latestRequiredData) > 0) {
         // Data is missing from the end. Mark as 'unavailable' at the most recent time we can reasonably expect data.
         // That's the most recent round 5 minutes that's at least 5 minutes ago.
         // If it's 12:15, we can expect data up to at least 12:10, but no data at 12:15 isn't an error - it might just be late.
         // We won't mark the data at 12:15 missing until 12:20.
-        output.fineGrainedData[latestRequiredData] = 'unavailable'
+        fineGrainedData[latestRequiredData] = 'unavailable'
     }
 
-    for (let i = 1; i < Object.keys(output.fineGrainedData).length; i++) {
-        const availableTimestamps = Object.keys(output.fineGrainedData).sort()
+    for (let i = 1; i < Object.keys(fineGrainedData).length; i++) {
+        const availableTimestamps = Object.keys(fineGrainedData).sort()
         if (differenceInMs(availableTimestamps[i-1], availableTimestamps[i]) > FIVE_MINUTES_IN_MS) {
             const missingTimestamp = nextRound5Minutes(availableTimestamps[i-1])
             const formatted = formatIsoMinutes(missingTimestamp)
-            output.fineGrainedData[formatted] = 'unavailable'
+            fineGrainedData[formatted] = 'unavailable'
         }
     }
-
-    return output
 }
 
 function nextRound5Minutes(input) {
@@ -69,6 +64,20 @@ function formatIsoMinutes(date) {
     const iso8601Datetime = date.toISOString()
     const toMinutePrecision = iso8601Datetime.substring(0, 16)
     return toMinutePrecision
+}
+
+function deepCopy(input) {
+    if (input instanceof Array) {
+        return input.map(it => deepCopy(it))
+    } else if (typeof input === 'object') {
+        const output = {}
+        for (let key in input) {
+            output[key] = deepCopy(input[key])
+        }
+        return output
+    } else {
+        return input
+    }
 }
 
 export { normalise }
