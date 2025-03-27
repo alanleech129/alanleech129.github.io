@@ -1,50 +1,60 @@
 import { getData } from './dataProvider.js'
 
 const STYLE_CONTENT = `
-    .status-container {
+    .namespace {
         margin: 2em;
     }
 
-    .availability-container {
-        display: grid;
-        grid-template-columns: repeat(24, 1fr); /* 7em; for the date */
-        width: 16em;
-    }
+    .timespan-container {
+        display: flex;
+        align-items: center;
 
-    .availability-block {
-        height: 2em;
-        width: 0.5em;
-        margin: 0.1em;
-
-        &.available {
-            background-color: green;
-        }
-
-        &.unavailable {
-            background-color: red;
-        }
-
-        .availability-details {
-            display: none;
-        }
-
-        &:hover .availability-details {
-            display: inline-block;
-            position: relative;
-            top: 3em;
+        .label {
+            display: inline;
             padding: 0.5em;
-            border: solid black 1px;
-            text-wrap-mode: nowrap;
-            background: white;
+        }
 
-            p {
-                margin: 0;
+        .availability-container {
+            display: inline grid;
+            grid-template-columns: repeat(24, 1fr); /* 7em; for the date */
+            width: 16em;
+        }
+
+        .availability-block {
+            height: 2em;
+            width: 0.5em;
+            margin: 0.1em;
+
+            &.available {
+                background-color: green;
+            }
+
+            &.unavailable {
+                background-color: red;
+            }
+
+            .availability-details {
+                display: none;
+            }
+
+            &:hover .availability-details {
+                display: inline-block;
+                position: relative;
+                top: 3em;
+                padding: 0.5em;
+                border: solid black 1px;
+                text-wrap-mode: nowrap;
+                background: white;
+
+                p {
+                    margin: 0;
+                }
             }
         }
-    }
 
-    .availability-date {
-        margin-left: 1em;
+        .availability-date {
+            margin-left: 1em;
+        }
     }
 `
 
@@ -60,35 +70,59 @@ class StatusBlock extends HTMLElement {
         const data = await getData(name)
 
         const content = document.createElement('div')
-        content.classList ='status-container'
+        content.classList ='namespace'
 
         content.insertAdjacentHTML('afterBegin', `<h2>${name}</h2>`)
-
-        const statusContainer = document.createElement('div')
-        statusContainer.classList = 'availability-container'
-
-        this.dataToListOfAvailabilityElements(data.fineGrainedData)
-            .forEach(block => statusContainer.insertAdjacentElement('beforeEnd', block))
-
-        content.insertAdjacentElement('beforeEnd', statusContainer)
+        this.insertAvailabilityRows(content, data)
 
         shadow.appendChild(content)
     }
 
-    dataToListOfAvailabilityElements(data) {
-        return Object.keys(data)
-            .sort()
-            .map(time => {
+    insertAvailabilityRows(statusContainer, data) {
+        const lastTwoHours = this.timespanSummary('Last two hours', this.lastTwoHours(data))
+
+        statusContainer.insertAdjacentElement('beforeEnd', lastTwoHours)
+    }
+
+    timespanSummary(label, data) {
+        const container = document.createElement('div')
+        container.classList = 'timespan-container'
+
+        const labelElement = document.createElement('span')
+        labelElement.classList = 'label'
+        labelElement.innerText = label
+        container.insertAdjacentElement('beforeEnd', labelElement)
+
+        const availabilityContainer = document.createElement('span')
+        availabilityContainer.classList = 'availability-container'
+        data.map(({label, status}) => {
                 const block = document.createElement('div')
-                const status = data[time]
                 block.classList = `availability-block ${status}`
 
                 const details = document.createElement('div')
                 details.classList = 'availability-details'
-                details.innerHTML = `<p>${time}</p><p>${status}</p>`
+                details.innerHTML = `<p>${label}</p><p>${status}</p>`
                 block.insertAdjacentElement('beforeEnd', details)
 
                 return block
+            })
+            .forEach(block => availabilityContainer.insertAdjacentElement('beforeEnd', block))
+        container.insertAdjacentElement('beforeEnd', availabilityContainer)
+
+        return container
+    }
+
+    lastTwoHours(data) {
+        return Object.keys(data.fineGrainedData)
+            .sort()
+            .slice(-24)
+            .map(dt => {
+                const time = dt.split('T')[1]
+                const status = data.fineGrainedData[dt]
+                return {
+                    label: time,
+                    status
+                }
             })
     }
 }
