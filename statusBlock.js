@@ -8,22 +8,24 @@ const STYLE_CONTENT = `
     .timespan-container {
         display: flex;
         align-items: center;
+        margin: 0.5em;
 
         .label {
             display: inline;
             padding: 0.5em;
+            width: 7em;
         }
 
         .availability-container {
-            display: inline grid;
-            grid-template-columns: repeat(24, 1fr); /* 7em; for the date */
-            width: 16em;
+            display: inline flex;
+            justify-content: flex-end;
+            width: 16.6em;
+            gap: 0.2em;
         }
 
         .availability-block {
             height: 2em;
             width: 0.5em;
-            margin: 0.1em;
 
             &.available {
                 background-color: green;
@@ -79,9 +81,11 @@ class StatusBlock extends HTMLElement {
     }
 
     insertAvailabilityRows(statusContainer, data) {
+        const last24Days = this.timespanSummary('Last 24 days', this.last24Days(data))
         const last24Hours = this.timespanSummary('Last 24 hours', this.last24Hours(data))
         const lastTwoHours = this.timespanSummary('Last two hours', this.lastTwoHours(data))
 
+        statusContainer.insertAdjacentElement('beforeEnd', last24Days)
         statusContainer.insertAdjacentElement('beforeEnd', last24Hours)
         statusContainer.insertAdjacentElement('beforeEnd', lastTwoHours)
     }
@@ -97,45 +101,96 @@ class StatusBlock extends HTMLElement {
 
         const availabilityContainer = document.createElement('span')
         availabilityContainer.classList = 'availability-container'
-        data.map(({label, status}) => {
-                const block = document.createElement('div')
-                block.classList = `availability-block ${status}`
-
-                const details = document.createElement('div')
-                details.classList = 'availability-details'
-                details.innerHTML = `<p>${label}</p><p>${status}</p>`
-                block.insertAdjacentElement('beforeEnd', details)
-
-                return block
-            })
-            .forEach(block => availabilityContainer.insertAdjacentElement('beforeEnd', block))
+        data.forEach(block => availabilityContainer.insertAdjacentElement('beforeEnd', block))
         container.insertAdjacentElement('beforeEnd', availabilityContainer)
 
         return container
+    }
+
+    last24Days(data) {
+        return Object.keys(data.summarisedByDate)
+            .sort()
+            .slice(-24)
+            .map(timestamp => {
+                const uptimePercent = this.roundToTwoDp(data.summarisedByDate[timestamp].uptime * 100)
+
+                const container = document.createElement('div')
+                container.classList = 'availability-block'
+
+                const available = document.createElement('div')
+                available.setAttribute('style', `height: ${uptimePercent}%`)
+                available.classList = 'availability-block available'
+
+                const unavailable = document.createElement('div')
+                unavailable.setAttribute('style', `height: ${100 - uptimePercent}%`)
+                unavailable.classList = 'availability-block unavailable'
+
+                const details = document.createElement('div')
+                details.classList = 'availability-details'
+                details.innerHTML = `<p>${timestamp}</p><p>Uptime: ${uptimePercent}%</p>`
+
+                container.insertAdjacentElement('beforeEnd', unavailable)
+                container.insertAdjacentElement('beforeEnd', available)
+                container.insertAdjacentElement('beforeEnd', details)
+
+                return container
+            })
     }
 
     last24Hours(data) {
         return Object.keys(data.summarisedByHour)
             .sort()
             .slice(-24)
-            .map(dt => ({
-                label: dt,
-                status: data.summarisedByHour[dt]
-            }))
+            .map(timestamp => {
+                const uptimePercent = this.roundToTwoDp(data.summarisedByHour[timestamp].uptime * 100)
+
+                const container = document.createElement('div')
+                container.classList = 'availability-block'
+
+                const available = document.createElement('div')
+                available.setAttribute('style', `height: ${uptimePercent}%`)
+                available.classList = 'availability-block available'
+
+                const unavailable = document.createElement('div')
+                unavailable.setAttribute('style', `height: ${100 - uptimePercent}%`)
+                unavailable.classList = 'availability-block unavailable'
+
+                const details = document.createElement('div')
+                details.classList = 'availability-details'
+                details.innerHTML = `<p>${timestamp}</p><p>Uptime: ${uptimePercent}%</p>`
+
+                container.insertAdjacentElement('beforeEnd', unavailable)
+                container.insertAdjacentElement('beforeEnd', available)
+                container.insertAdjacentElement('beforeEnd', details)
+
+                return container
+            })
     }
 
     lastTwoHours(data) {
         return Object.keys(data.fineGrainedData)
             .sort()
             .slice(-24)
-            .map(dt => {
-                const time = dt.split('T')[1]
-                const status = data.fineGrainedData[dt]
-                return {
-                    label: time,
-                    status
-                }
+            .map(timestamp => {
+                const time = timestamp.split('T')[1]
+                const status = data.fineGrainedData[timestamp]
+
+                const block = document.createElement('div')
+                block.classList = `availability-block ${status}`
+
+                const details = document.createElement('div')
+                details.classList = 'availability-details'
+                details.innerHTML = `<p>${time}</p><p>${status}</p>`
+                block.insertAdjacentElement('beforeEnd', details)
+
+                return block
             })
+    }
+
+    roundToTwoDp(number) {
+        const times100 = number * 100
+        const rounded = Math.round(times100)
+        return rounded * 0.01
     }
 }
 

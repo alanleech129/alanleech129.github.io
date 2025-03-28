@@ -1,51 +1,8 @@
 {
     "foo": {
-        "earliestFineGrainedData": "2025-03-27T08:55",
+        "earliestFineGrainedData": "2025-03-27T12:30",
         "fineGrainedData": {
             "2025-03-28T09:09": "available",
-            "2025-03-27T08:55": "unavailable",
-            "2025-03-27T09:00": "unavailable",
-            "2025-03-27T09:05": "unavailable",
-            "2025-03-27T09:10": "unavailable",
-            "2025-03-27T09:15": "unavailable",
-            "2025-03-27T09:20": "unavailable",
-            "2025-03-27T09:25": "unavailable",
-            "2025-03-27T09:30": "unavailable",
-            "2025-03-27T09:35": "unavailable",
-            "2025-03-27T09:40": "unavailable",
-            "2025-03-27T09:45": "unavailable",
-            "2025-03-27T09:50": "unavailable",
-            "2025-03-27T09:55": "unavailable",
-            "2025-03-27T10:00": "unavailable",
-            "2025-03-27T10:05": "unavailable",
-            "2025-03-27T10:10": "unavailable",
-            "2025-03-27T10:15": "unavailable",
-            "2025-03-27T10:20": "unavailable",
-            "2025-03-27T10:25": "unavailable",
-            "2025-03-27T10:30": "unavailable",
-            "2025-03-27T10:35": "unavailable",
-            "2025-03-27T10:40": "unavailable",
-            "2025-03-27T10:45": "unavailable",
-            "2025-03-27T10:50": "unavailable",
-            "2025-03-27T10:55": "unavailable",
-            "2025-03-27T11:00": "unavailable",
-            "2025-03-27T11:05": "unavailable",
-            "2025-03-27T11:10": "unavailable",
-            "2025-03-27T11:15": "unavailable",
-            "2025-03-27T11:20": "unavailable",
-            "2025-03-27T11:25": "unavailable",
-            "2025-03-27T11:30": "unavailable",
-            "2025-03-27T11:35": "unavailable",
-            "2025-03-27T11:40": "unavailable",
-            "2025-03-27T11:45": "unavailable",
-            "2025-03-27T11:50": "unavailable",
-            "2025-03-27T11:55": "unavailable",
-            "2025-03-27T12:00": "unavailable",
-            "2025-03-27T12:05": "unavailable",
-            "2025-03-27T12:10": "unavailable",
-            "2025-03-27T12:15": "unavailable",
-            "2025-03-27T12:20": "unavailable",
-            "2025-03-27T12:25": "unavailable",
             "2025-03-27T12:30": "unavailable",
             "2025-03-27T12:35": "unavailable",
             "2025-03-27T12:40": "unavailable",
@@ -306,7 +263,51 @@
             "2025-03-28T09:49": "available",
             "2025-03-28T09:40": "unavailable",
             "2025-03-28T09:45": "unavailable",
-            "2025-03-28T09:51": "available"
+            "2025-03-28T09:51": "available",
+            "2025-03-28T12:30": "available",
+            "2025-03-28T09:55": "unavailable",
+            "2025-03-28T10:00": "unavailable",
+            "2025-03-28T10:05": "unavailable",
+            "2025-03-28T10:10": "unavailable",
+            "2025-03-28T10:15": "unavailable",
+            "2025-03-28T10:20": "unavailable",
+            "2025-03-28T10:25": "unavailable",
+            "2025-03-28T10:30": "unavailable",
+            "2025-03-28T10:35": "unavailable",
+            "2025-03-28T10:40": "unavailable",
+            "2025-03-28T10:45": "unavailable",
+            "2025-03-28T10:50": "unavailable",
+            "2025-03-28T10:55": "unavailable",
+            "2025-03-28T11:00": "unavailable",
+            "2025-03-28T11:05": "unavailable",
+            "2025-03-28T11:10": "unavailable",
+            "2025-03-28T11:15": "unavailable",
+            "2025-03-28T11:20": "unavailable",
+            "2025-03-28T11:25": "unavailable",
+            "2025-03-28T11:30": "unavailable",
+            "2025-03-28T11:35": "unavailable",
+            "2025-03-28T11:40": "unavailable",
+            "2025-03-28T11:45": "unavailable",
+            "2025-03-28T11:50": "unavailable",
+            "2025-03-28T11:55": "unavailable",
+            "2025-03-28T12:00": "unavailable",
+            "2025-03-28T12:05": "unavailable",
+            "2025-03-28T12:10": "unavailable",
+            "2025-03-28T12:15": "unavailable",
+            "2025-03-28T12:20": "unavailable",
+            "2025-03-28T12:25": "unavailable",
+            "2025-03-28T13:28": "available",
+            "2025-03-28T12:35": "unavailable",
+            "2025-03-28T12:40": "unavailable",
+            "2025-03-28T12:45": "unavailable",
+            "2025-03-28T12:50": "unavailable",
+            "2025-03-28T12:55": "unavailable",
+            "2025-03-28T13:00": "unavailable",
+            "2025-03-28T13:05": "unavailable",
+            "2025-03-28T13:10": "unavailable",
+            "2025-03-28T13:15": "unavailable",
+            "2025-03-28T13:20": "unavailable",
+            "2025-03-28T13:25": "unavailable"
         },
         "summarisedByDate": {
             "2025-03-25": {
@@ -320,18 +321,6 @@
             }
         },
         "summarisedByHour": {
-            "2025-03-27T09": {
-                "uptime": 0
-            },
-            "2025-03-27T10": {
-                "uptime": 0
-            },
-            "2025-03-27T11": {
-                "uptime": 0
-            },
-            "2025-03-27T12": {
-                "uptime": 0
-            },
             "2025-03-27T13": {
                 "uptime": 0
             },
@@ -391,56 +380,25 @@
             },
             "2025-03-28T08": {
                 "uptime": 0
+            },
+            "2025-03-28T09": {
+                "uptime": 0.25
+            },
+            "2025-03-28T10": {
+                "uptime": 0
+            },
+            "2025-03-28T11": {
+                "uptime": 0
+            },
+            "2025-03-28T12": {
+                "uptime": 0.08333333333333333
             }
         }
     },
     "bar": {
-        "earliestFineGrainedData": "2025-03-27T08:55",
+        "earliestFineGrainedData": "2025-03-27T12:30",
         "fineGrainedData": {
             "2025-03-28T09:09": "available",
-            "2025-03-27T08:55": "unavailable",
-            "2025-03-27T09:00": "unavailable",
-            "2025-03-27T09:05": "unavailable",
-            "2025-03-27T09:10": "unavailable",
-            "2025-03-27T09:15": "unavailable",
-            "2025-03-27T09:20": "unavailable",
-            "2025-03-27T09:25": "unavailable",
-            "2025-03-27T09:30": "unavailable",
-            "2025-03-27T09:35": "unavailable",
-            "2025-03-27T09:40": "unavailable",
-            "2025-03-27T09:45": "unavailable",
-            "2025-03-27T09:50": "unavailable",
-            "2025-03-27T09:55": "unavailable",
-            "2025-03-27T10:00": "unavailable",
-            "2025-03-27T10:05": "unavailable",
-            "2025-03-27T10:10": "unavailable",
-            "2025-03-27T10:15": "unavailable",
-            "2025-03-27T10:20": "unavailable",
-            "2025-03-27T10:25": "unavailable",
-            "2025-03-27T10:30": "unavailable",
-            "2025-03-27T10:35": "unavailable",
-            "2025-03-27T10:40": "unavailable",
-            "2025-03-27T10:45": "unavailable",
-            "2025-03-27T10:50": "unavailable",
-            "2025-03-27T10:55": "unavailable",
-            "2025-03-27T11:00": "unavailable",
-            "2025-03-27T11:05": "unavailable",
-            "2025-03-27T11:10": "unavailable",
-            "2025-03-27T11:15": "unavailable",
-            "2025-03-27T11:20": "unavailable",
-            "2025-03-27T11:25": "unavailable",
-            "2025-03-27T11:30": "unavailable",
-            "2025-03-27T11:35": "unavailable",
-            "2025-03-27T11:40": "unavailable",
-            "2025-03-27T11:45": "unavailable",
-            "2025-03-27T11:50": "unavailable",
-            "2025-03-27T11:55": "unavailable",
-            "2025-03-27T12:00": "unavailable",
-            "2025-03-27T12:05": "unavailable",
-            "2025-03-27T12:10": "unavailable",
-            "2025-03-27T12:15": "unavailable",
-            "2025-03-27T12:20": "unavailable",
-            "2025-03-27T12:25": "unavailable",
             "2025-03-27T12:30": "unavailable",
             "2025-03-27T12:35": "unavailable",
             "2025-03-27T12:40": "unavailable",
@@ -701,7 +659,51 @@
             "2025-03-28T09:49": "available",
             "2025-03-28T09:40": "unavailable",
             "2025-03-28T09:45": "unavailable",
-            "2025-03-28T09:51": "available"
+            "2025-03-28T09:51": "available",
+            "2025-03-28T12:30": "available",
+            "2025-03-28T09:55": "unavailable",
+            "2025-03-28T10:00": "unavailable",
+            "2025-03-28T10:05": "unavailable",
+            "2025-03-28T10:10": "unavailable",
+            "2025-03-28T10:15": "unavailable",
+            "2025-03-28T10:20": "unavailable",
+            "2025-03-28T10:25": "unavailable",
+            "2025-03-28T10:30": "unavailable",
+            "2025-03-28T10:35": "unavailable",
+            "2025-03-28T10:40": "unavailable",
+            "2025-03-28T10:45": "unavailable",
+            "2025-03-28T10:50": "unavailable",
+            "2025-03-28T10:55": "unavailable",
+            "2025-03-28T11:00": "unavailable",
+            "2025-03-28T11:05": "unavailable",
+            "2025-03-28T11:10": "unavailable",
+            "2025-03-28T11:15": "unavailable",
+            "2025-03-28T11:20": "unavailable",
+            "2025-03-28T11:25": "unavailable",
+            "2025-03-28T11:30": "unavailable",
+            "2025-03-28T11:35": "unavailable",
+            "2025-03-28T11:40": "unavailable",
+            "2025-03-28T11:45": "unavailable",
+            "2025-03-28T11:50": "unavailable",
+            "2025-03-28T11:55": "unavailable",
+            "2025-03-28T12:00": "unavailable",
+            "2025-03-28T12:05": "unavailable",
+            "2025-03-28T12:10": "unavailable",
+            "2025-03-28T12:15": "unavailable",
+            "2025-03-28T12:20": "unavailable",
+            "2025-03-28T12:25": "unavailable",
+            "2025-03-28T13:28": "available",
+            "2025-03-28T12:35": "unavailable",
+            "2025-03-28T12:40": "unavailable",
+            "2025-03-28T12:45": "unavailable",
+            "2025-03-28T12:50": "unavailable",
+            "2025-03-28T12:55": "unavailable",
+            "2025-03-28T13:00": "unavailable",
+            "2025-03-28T13:05": "unavailable",
+            "2025-03-28T13:10": "unavailable",
+            "2025-03-28T13:15": "unavailable",
+            "2025-03-28T13:20": "unavailable",
+            "2025-03-28T13:25": "unavailable"
         },
         "summarisedByDate": {
             "2025-03-25": {
@@ -715,18 +717,6 @@
             }
         },
         "summarisedByHour": {
-            "2025-03-27T09": {
-                "uptime": 0
-            },
-            "2025-03-27T10": {
-                "uptime": 0
-            },
-            "2025-03-27T11": {
-                "uptime": 0
-            },
-            "2025-03-27T12": {
-                "uptime": 0
-            },
             "2025-03-27T13": {
                 "uptime": 0
             },
@@ -786,6 +776,18 @@
             },
             "2025-03-28T08": {
                 "uptime": 0
+            },
+            "2025-03-28T09": {
+                "uptime": 0.25
+            },
+            "2025-03-28T10": {
+                "uptime": 0
+            },
+            "2025-03-28T11": {
+                "uptime": 0
+            },
+            "2025-03-28T12": {
+                "uptime": 0.08333333333333333
             }
         }
     }
