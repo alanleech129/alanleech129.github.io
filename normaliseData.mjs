@@ -12,6 +12,14 @@ function normalise(data, now) {
 
 function normaliseNamespace(data, now) {
     fillInMissingTimestampsAsUnavailable(data, now)
+
+    const measurementLengths = timeBetweenMeasurements(data) // Don't want this to be serialised, so keep it separate.
+    summariseByHour(data, measurementLengths, now)
+    summariseByDate(data, measurementLengths, now)
+
+    deleteOldData(data, now)
+
+    data.earliestFineGrainedData = Object.keys(data.fineGrainedData).sort()[0]
 }
 
 function fillInMissingTimestampsAsUnavailable(data, now) {
@@ -44,6 +52,99 @@ function fillInMissingTimestampsAsUnavailable(data, now) {
             fineGrainedData[formatted] = 'unavailable'
         }
     }
+}
+
+function summariseByHour(data, measurementLengths, now) {
+    if (!data.summarisedByHour) {
+        data.summarisedByHour = {}
+    }
+    const thisHour = now.split(':')[0]
+
+    const hoursWithFinegrainedData = new Set(Object.keys(data.fineGrainedData).map(it => it.split(':')[0]))
+    Array.from(hoursWithFinegrainedData)
+        .filter(datetime => datetime !== thisHour && !data.summarisedByHour[datetime])
+        .forEach(datetime => {
+            const uptimeMs = uptime(data, measurementLengths, datetime)
+            console.log(`calculated uptime for ${datetime}: ${uptimeMs}`)
+            data.summarisedByHour[datetime] = { uptime: uptimeMs / 3600000 }
+        })
+}
+
+function summariseByDate(data, measurementLengths, now) {
+    if (!data.summarisedByDate) {
+        data.summarisedByDate = {}
+    }
+    const today = now.split('T')[0]
+
+    const datesWithFineGrainedData = new Set(Object.keys(data.fineGrainedData).map(it => it.split('T')[0]))
+    Array.from(datesWithFineGrainedData)
+        .filter(date => date !== today && !data.summarisedByDate[date])
+        .forEach(date => {
+            const uptimeMs = uptime(data, measurementLengths, date)
+            console.log(`calculated uptime for ${date}: ${uptimeMs}`)
+            data.summarisedByDate[date] = { uptime: uptimeMs / 86400000 }
+        })
+}
+
+function deleteOldData(data, now) {
+    const fineGrainedCutoffDate = new Date(now)
+    fineGrainedCutoffDate.setHours(fineGrainedCutoffDate.getHours() - 25)
+    const fineGrainedCutoff = fineGrainedCutoffDate.toISOString()
+
+    const hourlyCutoffDate = new Date(now)
+    hourlyCutoffDate.setHours(hourlyCutoffDate.getHours() - 25)
+    const hourlyCutoff = hourlyCutoffDate.toISOString()
+
+    const dailyCutoffDate = new Date(now)
+    dailyCutoffDate.setDate(dailyCutoffDate.getDate() - 25)
+    const dailyCutoff = dailyCutoffDate.toISOString()
+
+    for (let timestamp in data.fineGrainedData) {
+        if (timestamp < fineGrainedCutoff) {
+            delete data.fineGrainedData[timestamp]
+        }
+    }
+
+    for (let timestamp in data.summarisedByHour) {
+        if (timestamp < hourlyCutoff) {
+            delete data.summarisedByHour[timestamp]
+        }
+    }
+
+    for (let timestamp in data.summarisedByDate) {
+        if (timestamp < dailyCutoff) {
+            delete data.summarisedByDate[timestamp]
+        }
+    }
+}
+
+/**
+ * Calculate the uptime in milliseconds for a given timestamp prefix
+ *
+ * timestamp prefix: an ISO 8601 datetime with a lower precision then is found in `data` (and `measurementLengths`, which has the same keys).
+ * `data` is to minute precision: 2000-01-01T12:34
+ * If the prefix is a date (2000-01-01) then we'll calculate uptime for the day.
+ * If the prefix is to hour precision (2000-01-01T12) then it's for the hour.
+ *
+ * ISO 8601 datetimes to hour precision are perfectly value, just unusual!
+ */
+function uptime(data, measurementLengths, timestampPrefix) {
+    return Object.keys(data.fineGrainedData)
+        .filter(timestamp => timestamp.startsWith(timestampPrefix))
+        .filter(timestamp => data.fineGrainedData[timestamp] === 'available')
+        .map(timestamp => measurementLengths[timestamp].lengthInMs)
+        .reduce((acc, value) => acc + value, 0)
+}
+
+function timeBetweenMeasurements(data) {
+    const timestamps = Object.keys(data.fineGrainedData).sort()
+    const measurementLengths = {}
+    for (let i = 0; i < timestamps.length - 1; i++) {
+        const thisTs = timestamps[i]
+        const nextTs = timestamps[i+1]
+        measurementLengths[thisTs] = { lengthInMs: differenceInMs(thisTs, nextTs) }
+    }
+    return measurementLengths
 }
 
 function nextRound5Minutes(input) {

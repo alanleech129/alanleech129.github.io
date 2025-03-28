@@ -38,10 +38,9 @@ function combineDataForNamespace(existingDataOrUndefined, newAvailability, now) 
     const fineGrainedData = {...existingDataOrUndefined?.fineGrainedData}
     fineGrainedData[now] = newAvailability
 
-    const earliestFineGrainedData = existingDataOrUndefined?.earliestFineGrainedData || now
-
     return {
-        earliestFineGrainedData,
+        earliestFineGrainedData: now, // default value
+        ...existingDataOrUndefined,
         fineGrainedData,
     }
 }
