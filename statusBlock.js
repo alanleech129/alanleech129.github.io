@@ -79,8 +79,10 @@ class StatusBlock extends HTMLElement {
     }
 
     insertAvailabilityRows(statusContainer, data) {
+        const last24Hours = this.timespanSummary('Last 24 hours', this.last24Hours(data))
         const lastTwoHours = this.timespanSummary('Last two hours', this.lastTwoHours(data))
 
+        statusContainer.insertAdjacentElement('beforeEnd', last24Hours)
         statusContainer.insertAdjacentElement('beforeEnd', lastTwoHours)
     }
 
@@ -110,6 +112,16 @@ class StatusBlock extends HTMLElement {
         container.insertAdjacentElement('beforeEnd', availabilityContainer)
 
         return container
+    }
+
+    last24Hours(data) {
+        return Object.keys(data.summarisedByHour)
+            .sort()
+            .slice(-24)
+            .map(dt => ({
+                label: dt,
+                status: data.summarisedByHour[dt]
+            }))
     }
 
     lastTwoHours(data) {

@@ -65,7 +65,6 @@ function summariseByHour(data, measurementLengths, now) {
         .filter(datetime => datetime !== thisHour && !data.summarisedByHour[datetime])
         .forEach(datetime => {
             const uptimeMs = uptime(data, measurementLengths, datetime)
-            console.log(`calculated uptime for ${datetime}: ${uptimeMs}`)
             data.summarisedByHour[datetime] = { uptime: uptimeMs / 3600000 }
         })
 }
@@ -81,7 +80,6 @@ function summariseByDate(data, measurementLengths, now) {
         .filter(date => date !== today && !data.summarisedByDate[date])
         .forEach(date => {
             const uptimeMs = uptime(data, measurementLengths, date)
-            console.log(`calculated uptime for ${date}: ${uptimeMs}`)
             data.summarisedByDate[date] = { uptime: uptimeMs / 86400000 }
         })
 }
