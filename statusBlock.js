@@ -155,9 +155,14 @@ class StatusBlock extends HTMLElement {
                 unavailable.setAttribute('style', `height: ${100 - uptimePercent}%`)
                 unavailable.classList = 'availability-block unavailable'
 
+                const [date, time] = timestamp.split('T')
+                const hourAs12HourZeroBased = Number.parseInt(time) % 12
+                const hourAs12Hour = hourAs12HourZeroBased === 0 ? 12 : hourAs12HourZeroBased
+                const amOrPm = Number.parseInt(time) < 12 ? 'am' : 'pm'
+                const formattedDateTime = `${date} ${hourAs12Hour}${amOrPm}`
                 const details = document.createElement('div')
                 details.classList = 'availability-details'
-                details.innerHTML = `<p>${timestamp}</p><p>Uptime: ${uptimePercent}%</p>`
+                details.innerHTML = `<p>${formattedDateTime}</p><p>Uptime: ${uptimePercent}%</p>`
 
                 container.insertAdjacentElement('beforeEnd', unavailable)
                 container.insertAdjacentElement('beforeEnd', available)
