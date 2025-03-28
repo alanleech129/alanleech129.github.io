@@ -2,6 +2,7 @@
 
 import { readFile, writeFile } from 'node:fs/promises'
 import { normalise } from './normaliseData.mjs'
+import statusChecker from './statusProviders/statusChecker.mjs'
 
 async function readCurrentDataFile() {
     try {
@@ -17,10 +18,16 @@ async function readCurrentDataFile() {
 }
 
 async function getStatuses() {
-    return {
-        foo: 'available',
-        bar: 'available'
+    const statuses = await Promise.all([
+        statusChecker(),
+    ])
+
+    const output = {}
+    for (let {name, status} of statuses) {
+        output[name] = status
     }
+
+    return output
 }
 
 function combineData(existingData, newData, nowUnformatted) {
