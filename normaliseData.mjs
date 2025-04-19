@@ -19,7 +19,6 @@ function processNamespace(data, now) {
 
 function normaliseNamespace(data, now) {
     const fineGrainedData = fillInMissingTimestampsAsUnavailable(data, now)
-    const earliestFineGrainedData = Object.keys(fineGrainedData).sort()[0]
 
     const withFilledInData = { ...data, fineGrainedData }
 
@@ -30,7 +29,6 @@ function normaliseNamespace(data, now) {
     return {
         ...data,
         fineGrainedData,
-        earliestFineGrainedData,
         summarisedByHour,
         summarisedByDate,
     }
@@ -38,13 +36,6 @@ function normaliseNamespace(data, now) {
 
 function fillInMissingTimestampsAsUnavailable(data, now) {
     const fineGrainedData = data.fineGrainedData
-    const earliestDataExpected = data.earliestFineGrainedData
-
-    const earliestDataActuallyAvailable = Object.keys(fineGrainedData).sort()[0]
-    if (differenceInMs(earliestDataExpected, earliestDataActuallyAvailable) > FIVE_MINUTES_IN_MS) {
-        // Data is missing from the start. Mark as 'unavailable' at the expected start time.
-        fineGrainedData[earliestDataExpected] = 'unavailable'
-    }
 
     const latestRequiredDataDate = new Date(now)
     latestRequiredDataDate.setMinutes(latestRequiredDataDate.getMinutes() - 10)
@@ -122,12 +113,9 @@ function deleteOldData(data, now) {
     const summarisedByHour = filterObjectByKeys(data.summarisedByHour, timestamp => timestamp > hourlyCutoff)
     const summarisedByDate = filterObjectByKeys(data.summarisedByDate, timestamp => timestamp > dailyCutoff)
 
-    const earliestFineGrainedData = (data.earliestFineGrainedData < fineGrainedCutoff) ? fineGrainedCutoff : data.earliestFineGrainedData
-
     return {
         ...data,
         fineGrainedData,
-        earliestFineGrainedData,
         summarisedByHour,
         summarisedByDate,
     }

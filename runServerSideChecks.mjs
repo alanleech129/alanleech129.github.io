@@ -46,7 +46,6 @@ function combineDataForNamespace(existingDataOrUndefined, newAvailability, now) 
     fineGrainedData[now] = newAvailability
 
     return {
-        earliestFineGrainedData: now, // default value
         ...existingDataOrUndefined,
         fineGrainedData,
     }
