@@ -33,7 +33,7 @@ async function getStatuses() {
 function combineData(existingData, newData, nowUnformatted) {
     const combined = {...existingData}
 
-    const now = nowUnformatted.toISOString().substring(0, 16)
+    const now = nowUnformatted.toISOString().substring(0, 16) + 'Z'
     for (let namespace in newData) {
         combined[namespace] = combineDataForNamespace(combined[namespace], newData[namespace], now)
     }
