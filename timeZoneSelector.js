@@ -25,7 +25,7 @@ const WARNING_MESSAGES = {
     fractionalHour: 'Your time zone is not a whole number of hours offset from UTC. Hourly statistics are still aggregated by UTC hours, and the times displayed will be off by up to an hour.',
 }
 
-class TimezoneSelector extends HTMLElement {
+class TimeZoneSelector extends HTMLElement {
     connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' })
 
@@ -146,4 +146,4 @@ class TimezoneSelector extends HTMLElement {
     }
 }
 
-customElements.define('timezone-selector', TimezoneSelector)
+customElements.define('time-zone-selector', TimeZoneSelector)
