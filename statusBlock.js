@@ -1,5 +1,5 @@
 import element from './createElement.js'
-import { getData } from './dataProvider.js'
+import { onData } from './dataProvider.js'
 
 const STYLE_CONTENT = `
     .namespace {
@@ -61,22 +61,55 @@ const STYLE_CONTENT = `
     }
 `
 
+const UTC = { name: 'UTC', type: 'utc', offset: 0, offsetFormatted: '+00:00' }
+
 class StatusBlock extends HTMLElement {
+    static observedAttributes = ['time-zone'];
+
+    constructor() {
+        super()
+        this.timeZone = UTC
+        this.data = undefined
+    }
+
     async connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' })
 
         const name = this.getAttribute('name')
-        const data = await getData(name)
+        onData(name, (data) => {
+            this.data = data
+            this.update()
+        })
 
-        const content = element('div', { classes: ['namespace'] }, [
-            element('h2', name),
-            this.timespanSummary('Last 24 days', this.last24Days(data)),
-            this.timespanSummary('Last 24 hours', this.last24Hours(data)),
-            this.timespanSummary('Last two hours', this.lastTwoHours(data)),
-        ])
+        this.content = element('div', 'Loading...')
 
         shadow.appendChild(element('style', STYLE_CONTENT))
-        shadow.appendChild(content)
+        shadow.appendChild(element('div', { classes: ['namespace'] }, [
+            element('h2', name),
+            this.content,
+        ]))
+
+        this.update()
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'time-zone') {
+            this.timeZone = JSON.parse(newValue)
+            this.update()
+        }
+    }
+
+    update() {
+        if (this.data) {
+            const content = element('div', [
+                this.timespanSummary('Last 24 days', this.last24Days(this.data)),
+                this.timespanSummary('Last 24 hours', this.last24Hours(this.data)),
+                this.timespanSummary('Last two hours', this.lastTwoHours(this.data)),
+            ])
+
+            this.content.replaceWith(content)
+            this.content = content
+        }
     }
 
     timespanSummary(label, data) {
@@ -87,53 +120,71 @@ class StatusBlock extends HTMLElement {
     }
 
     last24Days(data) {
+        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
+            timeZone: this.timeZone.name,
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        })
         return Object.keys(data.summarisedByDate)
             .sort()
             .slice(-24)
             .map(timestamp => {
                 const uptimePercent = this.roundToTwoDp(data.summarisedByDate[timestamp].uptime * 100)
 
+                const formatted = formatter.format(new Date(timestamp))
+
                 return element('div', { classes: ['availability-block'] }, [
                     element('div', { classes: ['availability-block unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
                     element('div', { classes: ['availability-block available'], style: `height: ${uptimePercent}%`}, null),
                     element('div', { classes: ['availability-details'] }, [
-                        element('p', timestamp),
-                        element('p', `Uptime: ${uptimePercent}`),
+                        element('p', formatted),
+                        element('p', `Uptime: ${uptimePercent}%`),
                     ])
                 ])
             })
     }
 
     last24Hours(data) {
+        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
+            timeZone: this.timeZone.name,
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+        })
         return Object.keys(data.summarisedByHour)
             .sort()
             .slice(-24)
             .map(timestamp => {
                 const uptimePercent = this.roundToTwoDp(data.summarisedByHour[timestamp].uptime * 100)
 
-                const [date, time] = timestamp.split('T')
-                const hourAs12HourZeroBased = Number.parseInt(time) % 12
-                const hourAs12Hour = hourAs12HourZeroBased === 0 ? 12 : hourAs12HourZeroBased
-                const amOrPm = Number.parseInt(time) < 12 ? 'am' : 'pm'
-                const formattedDateTime = `${date} ${hourAs12Hour}${amOrPm}`
+                const asDate = new Date(timestamp)
+                const formattedDateTime = formatter.format(asDate)
 
                 return element('div', { classes: ['availability-block'] }, [
                     element('div', { classes: ['availability-block unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
                     element('div', { classes: ['availability-block available'], style: `height: ${uptimePercent}%`}, null),
                     element('div', { classes: ['availability-details'] }, [
                         element('p', formattedDateTime),
-                        element('p', `Uptime: ${uptimePercent}`),
+                        element('p', `Uptime: ${uptimePercent}%`),
                     ])
                 ])
             })
     }
 
     lastTwoHours(data) {
+        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
+            timeZone: this.timeZone.name,
+            hour: 'numeric',
+            minute: '2-digit',
+        })
         return Object.keys(data.fineGrainedData)
             .sort()
             .slice(-24)
             .map(timestamp => {
-                const time = timestamp.split('T')[1]
+                const asDate = new Date(timestamp)
+                const time = formatter.format(asDate)
                 const status = data.fineGrainedData[timestamp]
 
                 return element('div', { classes: [`availability-block ${status}`]}, [
@@ -149,6 +200,15 @@ class StatusBlock extends HTMLElement {
         const times100 = number * 100
         const rounded = Math.round(times100)
         return rounded * 0.01
+    }
+
+    dateFromZuluIso8601WithMinutes(input) {
+        const [inputWithoutZ] = input.split('Z')
+        const [date, time] = inputWithoutZ.split('T')
+        const [year, oneBasedMonth, day] = date.split('-')
+        const [hours, minutes] = time.split(':')
+
+        return new Date(year, oneBasedMonth - 1, day, hours, minutes)
     }
 }
 

@@ -71,10 +71,10 @@ function summariseByHour(data, measurementLengths, now) {
     const hoursWithFinegrainedData = new Set(Object.keys(data.fineGrainedData).map(it => it.split(':')[0]))
     Array.from(hoursWithFinegrainedData)
         .filter(datetime => datetime !== thisHour)
-        .filter(datetime => !summarisedByHour[datetime])
+        .filter(datetime => !summarisedByHour[datetime + ':00Z'])
         .forEach(datetime => {
             const uptimeMs = uptime(data, measurementLengths, datetime)
-            summarisedByHour[datetime] = { uptime: uptimeMs / 3600000 }
+            summarisedByHour[datetime + ':00Z'] = { uptime: uptimeMs / 3600000 }
         })
 
     return summarisedByHour

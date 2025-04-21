@@ -18,7 +18,7 @@ const STYLE_CONTENT = `
     }
 `
 
-const UTC = {name: 'UTC', type: 'utc', offset: 0, offsetFormatted: '+00:00'}
+const UTC = { name: 'UTC', type: 'utc', offset: 0, offsetFormatted: '+00:00' }
 
 const WARNING_MESSAGES = {
     nonUtc: 'Your time zone is not UTC. Daily statistics are still aggregated by UTC days.',
@@ -90,10 +90,12 @@ class TimeZoneSelector extends HTMLElement {
 
         shadow.appendChild(element('style', STYLE_CONTENT))
         shadow.appendChild(container)
+
+        onTimezoneUpdated(selectedTimeZone)
     }
 
     localTimeZone() {
-        const localTimeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone
+        const localTimeZoneName = new Intl.DateTimeFormat().resolvedOptions().timeZone
         const offsetInMinutes = new Date().getTimezoneOffset()
         const offsetInHoursAndMinutes = this.minutesToHoursAndMinutes(new Date().getTimezoneOffset())
 

@@ -6,6 +6,7 @@
         <title>Status Page | leech.me.uk</title>
 
         <script type="module" src="statusBlock.js"></script>
+        <script type="module" src="timeZoneSelector.js"></script>
         <style>
             body {
                 font-family: sans-serif;
@@ -20,6 +21,16 @@
     <body>
         <h1>leech.me.uk Status Page</h1>
 
+        <time-zone-selector></time-zone-selector>
         <status-block name="Status checker"></status-block>
+
+        <script>
+            const statusBlocks = document.querySelectorAll('status-block')
+            const timeZoneSelector = document.querySelector('time-zone-selector')
+            timeZoneSelector.addEventListener('change', event => {
+                const tzInfo = JSON.stringify(event.detail)
+                statusBlocks.forEach(it => it.setAttribute('time-zone', tzInfo))
+            })
+        </script>
     </body>
 </html>

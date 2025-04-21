@@ -1,7 +1,5 @@
 import { normalise } from './normaliseData.mjs'
 
-let dataAvailable = false
-let data = undefined
 const dataQueue = []
 
 async function fetchData() {
@@ -10,21 +8,14 @@ async function fetchData() {
         throw new Error(response)
     }
 
-    data = normalise(await response.json(), new Date())
-    dataAvailable = true
+    const data = normalise(await response.json(), new Date())
     dataQueue.forEach(it => it(data))
 }
 
-async function getData(name) {
-    if (dataAvailable) {
-        return data[name]
-    } else {
-        return new Promise((resolve, reject) => {
-            dataQueue.push(data => resolve(data[name]))
-        })
-    }
+function onData(namespace, callback) {
+    dataQueue.push(data => callback(data[namespace]))
 }
 
 fetchData()
 
-export { getData }
+export { onData }
