@@ -29,14 +29,8 @@ class TimeZoneSelector extends HTMLElement {
     connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' })
 
-        const style = document.createElement('style')
-        style.textContent = STYLE_CONTENT
-        shadow.appendChild(style)
-
         const localTimeZone = this.localTimeZone()
         const selectedTimeZone = localStorage.getItem('timeZone') === 'utc' ? UTC : localTimeZone
-
-        const summaryElement = element('summary', this.summary(selectedTimeZone))
 
         const onTimezoneUpdated = (timeZone) => {
             shadow.dispatchEvent(new CustomEvent('change', {bubles: true, composed: true, detail: timeZone}))
@@ -44,6 +38,8 @@ class TimeZoneSelector extends HTMLElement {
             warningElement.replaceChildren(...this.warningMessages(timeZone))
             localStorage.setItem('timeZone', timeZone.type)
         }
+
+        const summaryElement = element('summary', this.summary(selectedTimeZone))
 
         const detailsElement = element('details', [
             summaryElement,
@@ -92,6 +88,7 @@ class TimeZoneSelector extends HTMLElement {
             warningElement,
         ])
 
+        shadow.appendChild(element('style', STYLE_CONTENT))
         shadow.appendChild(container)
     }
 
