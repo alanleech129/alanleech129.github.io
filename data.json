@@ -2,73 +2,6 @@
     "Status checker": {
         "fineGrainedData": {
             "2025-04-21T12:40Z": "available",
-            "2025-04-20T14:55Z": "unavailable",
-            "2025-04-20T15:00Z": "unavailable",
-            "2025-04-20T15:05Z": "unavailable",
-            "2025-04-20T15:10Z": "unavailable",
-            "2025-04-20T15:15Z": "unavailable",
-            "2025-04-20T15:20Z": "unavailable",
-            "2025-04-20T15:25Z": "unavailable",
-            "2025-04-20T15:30Z": "unavailable",
-            "2025-04-20T15:35Z": "unavailable",
-            "2025-04-20T15:40Z": "unavailable",
-            "2025-04-20T15:45Z": "unavailable",
-            "2025-04-20T15:50Z": "unavailable",
-            "2025-04-20T15:55Z": "unavailable",
-            "2025-04-20T16:00Z": "unavailable",
-            "2025-04-20T16:05Z": "unavailable",
-            "2025-04-20T16:10Z": "unavailable",
-            "2025-04-20T16:15Z": "unavailable",
-            "2025-04-20T16:20Z": "unavailable",
-            "2025-04-20T16:25Z": "unavailable",
-            "2025-04-20T16:30Z": "unavailable",
-            "2025-04-20T16:35Z": "unavailable",
-            "2025-04-20T16:40Z": "unavailable",
-            "2025-04-20T16:45Z": "unavailable",
-            "2025-04-20T16:50Z": "unavailable",
-            "2025-04-20T16:55Z": "unavailable",
-            "2025-04-20T17:00Z": "unavailable",
-            "2025-04-20T17:05Z": "unavailable",
-            "2025-04-20T17:10Z": "unavailable",
-            "2025-04-20T17:15Z": "unavailable",
-            "2025-04-20T17:20Z": "unavailable",
-            "2025-04-20T17:25Z": "unavailable",
-            "2025-04-20T17:30Z": "unavailable",
-            "2025-04-20T17:35Z": "unavailable",
-            "2025-04-20T17:40Z": "unavailable",
-            "2025-04-20T17:45Z": "unavailable",
-            "2025-04-20T17:50Z": "unavailable",
-            "2025-04-20T17:55Z": "unavailable",
-            "2025-04-20T18:00Z": "unavailable",
-            "2025-04-20T18:05Z": "unavailable",
-            "2025-04-20T18:10Z": "unavailable",
-            "2025-04-20T18:15Z": "unavailable",
-            "2025-04-20T18:20Z": "unavailable",
-            "2025-04-20T18:25Z": "unavailable",
-            "2025-04-20T18:30Z": "unavailable",
-            "2025-04-20T18:35Z": "unavailable",
-            "2025-04-20T18:40Z": "unavailable",
-            "2025-04-20T18:45Z": "unavailable",
-            "2025-04-20T18:50Z": "unavailable",
-            "2025-04-20T18:55Z": "unavailable",
-            "2025-04-20T19:00Z": "unavailable",
-            "2025-04-20T19:05Z": "unavailable",
-            "2025-04-20T19:10Z": "unavailable",
-            "2025-04-20T19:15Z": "unavailable",
-            "2025-04-20T19:20Z": "unavailable",
-            "2025-04-20T19:25Z": "unavailable",
-            "2025-04-20T19:30Z": "unavailable",
-            "2025-04-20T19:35Z": "unavailable",
-            "2025-04-20T19:40Z": "unavailable",
-            "2025-04-20T19:45Z": "unavailable",
-            "2025-04-20T19:50Z": "unavailable",
-            "2025-04-20T19:55Z": "unavailable",
-            "2025-04-20T20:00Z": "unavailable",
-            "2025-04-20T20:05Z": "unavailable",
-            "2025-04-20T20:10Z": "unavailable",
-            "2025-04-20T20:15Z": "unavailable",
-            "2025-04-20T20:20Z": "unavailable",
-            "2025-04-20T20:25Z": "unavailable",
             "2025-04-20T20:30Z": "unavailable",
             "2025-04-20T20:35Z": "unavailable",
             "2025-04-20T20:40Z": "unavailable",
@@ -301,29 +234,80 @@
             "2025-04-21T15:35Z": "unavailable",
             "2025-04-21T15:40Z": "unavailable",
             "2025-04-21T15:45Z": "unavailable",
-            "2025-04-21T15:50Z": "unavailable"
+            "2025-04-21T15:50Z": "unavailable",
+            "2025-04-21T17:00Z": "available",
+            "2025-04-21T15:55Z": "unavailable",
+            "2025-04-21T16:00Z": "unavailable",
+            "2025-04-21T16:05Z": "unavailable",
+            "2025-04-21T16:10Z": "unavailable",
+            "2025-04-21T16:15Z": "unavailable",
+            "2025-04-21T16:20Z": "unavailable",
+            "2025-04-21T16:25Z": "unavailable",
+            "2025-04-21T16:30Z": "unavailable",
+            "2025-04-21T16:35Z": "unavailable",
+            "2025-04-21T16:40Z": "unavailable",
+            "2025-04-21T16:45Z": "unavailable",
+            "2025-04-21T16:50Z": "unavailable",
+            "2025-04-21T16:55Z": "unavailable",
+            "2025-04-21T17:05Z": "available",
+            "2025-04-21T17:10Z": "available",
+            "2025-04-21T17:15Z": "available",
+            "2025-04-21T17:20Z": "available",
+            "2025-04-21T17:25Z": "available",
+            "2025-04-21T17:30Z": "available",
+            "2025-04-21T17:35Z": "available",
+            "2025-04-21T17:40Z": "available",
+            "2025-04-21T17:45Z": "available",
+            "2025-04-21T17:50Z": "available",
+            "2025-04-21T17:55Z": "available",
+            "2025-04-21T18:00Z": "available",
+            "2025-04-21T18:05Z": "available",
+            "2025-04-21T18:10Z": "available",
+            "2025-04-21T18:15Z": "available",
+            "2025-04-21T18:20Z": "available",
+            "2025-04-21T18:25Z": "available",
+            "2025-04-21T18:30Z": "available",
+            "2025-04-21T18:35Z": "available",
+            "2025-04-21T18:40Z": "available",
+            "2025-04-21T18:45Z": "available",
+            "2025-04-21T18:50Z": "available",
+            "2025-04-21T18:55Z": "available",
+            "2025-04-21T19:00Z": "available",
+            "2025-04-21T19:05Z": "available",
+            "2025-04-21T19:10Z": "available",
+            "2025-04-21T19:15Z": "available",
+            "2025-04-21T19:20Z": "available",
+            "2025-04-21T19:25Z": "available",
+            "2025-04-21T19:30Z": "available",
+            "2025-04-21T19:35Z": "available",
+            "2025-04-21T19:40Z": "available",
+            "2025-04-21T19:45Z": "available",
+            "2025-04-21T19:50Z": "available",
+            "2025-04-21T19:55Z": "available",
+            "2025-04-21T20:00Z": "available",
+            "2025-04-21T20:05Z": "available",
+            "2025-04-21T20:10Z": "available",
+            "2025-04-21T20:15Z": "available",
+            "2025-04-21T20:20Z": "available",
+            "2025-04-21T21:24Z": "available",
+            "2025-04-21T20:25Z": "unavailable",
+            "2025-04-21T20:30Z": "unavailable",
+            "2025-04-21T20:35Z": "unavailable",
+            "2025-04-21T20:40Z": "unavailable",
+            "2025-04-21T20:45Z": "unavailable",
+            "2025-04-21T20:50Z": "unavailable",
+            "2025-04-21T20:55Z": "unavailable",
+            "2025-04-21T21:00Z": "unavailable",
+            "2025-04-21T21:05Z": "unavailable",
+            "2025-04-21T21:10Z": "unavailable",
+            "2025-04-21T21:15Z": "unavailable",
+            "2025-04-21T21:20Z": "unavailable",
+            "2025-04-21T21:30Z": "available",
+            "2025-04-21T21:25Z": "unavailable"
         },
         "summarisedByHour": {
             "2025-04-21T12:00Z": {
                 "uptime": 0.08333333333333333
-            },
-            "2025-04-20T15:00Z": {
-                "uptime": 0
-            },
-            "2025-04-20T16:00Z": {
-                "uptime": 0
-            },
-            "2025-04-20T17:00Z": {
-                "uptime": 0
-            },
-            "2025-04-20T18:00Z": {
-                "uptime": 0
-            },
-            "2025-04-20T19:00Z": {
-                "uptime": 0
-            },
-            "2025-04-20T20:00Z": {
-                "uptime": 0
             },
             "2025-04-20T21:00Z": {
                 "uptime": 0
@@ -375,6 +359,24 @@
             },
             "2025-04-21T14:00Z": {
                 "uptime": 0
+            },
+            "2025-04-21T15:00Z": {
+                "uptime": 0.03333333333333333
+            },
+            "2025-04-21T16:00Z": {
+                "uptime": 0
+            },
+            "2025-04-21T17:00Z": {
+                "uptime": 1
+            },
+            "2025-04-21T18:00Z": {
+                "uptime": 1
+            },
+            "2025-04-21T19:00Z": {
+                "uptime": 1
+            },
+            "2025-04-21T20:00Z": {
+                "uptime": 0.4166666666666667
             }
         },
         "summarisedByDate": {

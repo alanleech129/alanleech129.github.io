@@ -135,8 +135,8 @@ class StatusBlock extends HTMLElement {
                 const formatted = formatter.format(new Date(timestamp))
 
                 return element('div', { classes: ['availability-block'] }, [
-                    element('div', { classes: ['availability-block unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
-                    element('div', { classes: ['availability-block available'], style: `height: ${uptimePercent}%`}, null),
+                    element('div', { classes: ['availability-block', 'unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
+                    element('div', { classes: ['availability-block', 'available'], style: `height: ${uptimePercent}%`}, null),
                     element('div', { classes: ['availability-details'] }, [
                         element('p', formatted),
                         element('p', `Uptime: ${uptimePercent}%`),
@@ -163,8 +163,8 @@ class StatusBlock extends HTMLElement {
                 const formattedDateTime = formatter.format(asDate)
 
                 return element('div', { classes: ['availability-block'] }, [
-                    element('div', { classes: ['availability-block unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
-                    element('div', { classes: ['availability-block available'], style: `height: ${uptimePercent}%`}, null),
+                    element('div', { classes: ['availability-block', 'unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
+                    element('div', { classes: ['availability-block', 'available'], style: `height: ${uptimePercent}%`}, null),
                     element('div', { classes: ['availability-details'] }, [
                         element('p', formattedDateTime),
                         element('p', `Uptime: ${uptimePercent}%`),
