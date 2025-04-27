@@ -1,3 +1,4 @@
+import { uptime, timeBetweenMeasurements, formatIsoMinutes, differenceInMs } from './dateFunctions.mjs'
 import element from './createElement.js'
 
 const DAILY_SUMMARY = 'DAILY_SUMMARY'
@@ -63,8 +64,17 @@ const lookup = {
             ])
         },
         uptime: (data) => {
-            const availabilityAsProportions = Objects.values(data).map(it => it === 'available' ? 1 : 0)
-            return proportionsToPercent(availabilityAsProportions)
+            const dataIncludingNow = {...data}
+            const now = formatIsoMinutes(new Date())
+            dataIncludingNow[now] = 'intentionally left blank'
+
+            const measurementLengths = timeBetweenMeasurements(dataIncludingNow)
+            const uptimeMs = uptime(dataIncludingNow, measurementLengths, '')
+
+            const totalTimeMs = differenceInMs(Object.keys(data).sort()[0], now)
+            const uptimeProportion = uptimeMs / totalTimeMs
+
+            return proportionsToPercent([uptimeProportion])
         }
     },
 }
@@ -77,6 +87,7 @@ function timespanSummary(timespanType, data, timeZone) {
     return element('div', { classes: ['timespan-container'] }, [
         element('span', { classes: ['label'] }, config.label),
         element('span', { classes: ['availability-container'] }, visualisationBlocks),
+        element('span', { classes: ['uptime'] }, config.uptime(data)),
     ])
 }
 
@@ -93,18 +104,25 @@ function proportionsToPercent(proportions) {
     }
 
     const sum = proportions.reduce((a, b) => (a+ b))
-    const average = sum / roportions.length
+    const average = sum / proportions.length
     if (average > '0.9999') {
         return '> 99.99%'
     } else {
-        return `${roundToTwoDp(average)}%`
+        return `${roundToTwoDp(average * 100)}%`
     }
 }
 
 function roundToTwoDp(number) {
-    const times100 = number * 100
-    const rounded = Math.round(times100)
-    return rounded * 0.01
+    if (number < 0) {
+        return `-${roundToTwoDp(number * -1)}`
+    }
+
+    const floorThis = number + 0.005
+    if (floorThis < 10) {
+        return floorThis.toString().substring(0, 4)
+    } else {
+        return floorThis.toString().substring(0, 5)
+    }
 }
 
 export { DAILY_SUMMARY, HOURLY_SUMMARY, FINE_GRAINED, timespanSummary }

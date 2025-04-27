@@ -2,6 +2,7 @@
 
 import { readFile, writeFile } from 'node:fs/promises'
 import { normalise } from './normaliseData.mjs'
+import { formatIsoMinutes } from './dateFunctions.mjs'
 import statusChecker from './statusProviders/statusChecker.mjs'
 
 async function readCurrentDataFile() {
@@ -33,7 +34,7 @@ async function getStatuses() {
 function combineData(existingData, newData, nowUnformatted) {
     const combined = {...existingData}
 
-    const now = nowUnformatted.toISOString().substring(0, 16) + 'Z'
+    const now = formatIsoMinutes(nowUnformatted)
     for (let namespace in newData) {
         combined[namespace] = combineDataForNamespace(combined[namespace], newData[namespace], now)
     }

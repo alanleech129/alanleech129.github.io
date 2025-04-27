@@ -7,6 +7,11 @@ const STYLE_CONTENT = `
         margin: 2em;
     }
 
+    .summary {
+        font-weight: bold;
+        margin: 1em;
+    }
+
     .timespan-container {
         display: flex;
         align-items: center;
@@ -59,6 +64,10 @@ const STYLE_CONTENT = `
         .availability-date {
             margin-left: 1em;
         }
+
+        .uptime {
+            padding: 0.5em
+        }
     }
 `
 
@@ -103,6 +112,7 @@ class StatusBlock extends HTMLElement {
     update() {
         if (this.data) {
             const content = element('div', [
+                this.summary(this.data),
                 timespanSummary(DAILY_SUMMARY, this.data.summarisedByDate, this.timeZone),
                 timespanSummary(HOURLY_SUMMARY, this.data.summarisedByHour, this.timeZone),
                 timespanSummary(FINE_GRAINED, this.recentFineGrainedData(), this.timeZone),
@@ -122,6 +132,20 @@ class StatusBlock extends HTMLElement {
                 recent[timestamp] = this.data.fineGrainedData[timestamp]
             })
         return recent
+    }
+
+    summary(data) {
+        const mostRecentTimestamp = Object.keys(data.fineGrainedData).sort().reverse()[0]
+        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
+            timeZone: this.timeZone.name,
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+        })
+        const formattedDateTime = formatter.format(new Date(mostRecentTimestamp))
+        const status = data.fineGrainedData[mostRecentTimestamp]
+        return element('div', { classes: ['summary'] }, `${formattedDateTime}: ${status}`)
     }
 }
 
