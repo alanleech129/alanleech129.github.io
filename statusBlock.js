@@ -1,4 +1,5 @@
 import element from './createElement.js'
+import { DAILY_SUMMARY, HOURLY_SUMMARY, FINE_GRAINED, timespanSummary } from './timespanSummary.js'
 import { onData } from './dataProvider.js'
 
 const STYLE_CONTENT = `
@@ -72,7 +73,7 @@ class StatusBlock extends HTMLElement {
         this.data = undefined
     }
 
-    async connectedCallback() {
+    connectedCallback() {
         const shadow = this.attachShadow({ mode: 'open' })
 
         const name = this.getAttribute('name')
@@ -102,9 +103,9 @@ class StatusBlock extends HTMLElement {
     update() {
         if (this.data) {
             const content = element('div', [
-                this.timespanSummary('Last 24 days', this.last24Days(this.data)),
-                this.timespanSummary('Last 24 hours', this.last24Hours(this.data)),
-                this.timespanSummary('Last two hours', this.lastTwoHours(this.data)),
+                timespanSummary(DAILY_SUMMARY, this.data.summarisedByDate, this.timeZone),
+                timespanSummary(HOURLY_SUMMARY, this.data.summarisedByHour, this.timeZone),
+                timespanSummary(FINE_GRAINED, this.recentFineGrainedData(), this.timeZone),
             ])
 
             this.content.replaceWith(content)
@@ -112,103 +113,15 @@ class StatusBlock extends HTMLElement {
         }
     }
 
-    timespanSummary(label, data) {
-        return element('div', { classes: ['timespan-container'] }, [
-            element('span', { classes: ['label'] }, label),
-            element('span', { classes: ['availability-container'] }, data),
-        ])
-    }
-
-    last24Days(data) {
-        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
-            timeZone: this.timeZone.name,
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        })
-        return Object.keys(data.summarisedByDate)
+    recentFineGrainedData() {
+        const recent = {}
+        Object.keys(this.data.fineGrainedData)
             .sort()
             .slice(-24)
-            .map(timestamp => {
-                const uptimePercent = this.roundToTwoDp(data.summarisedByDate[timestamp].uptime * 100)
-
-                const formatted = formatter.format(new Date(timestamp))
-
-                return element('div', { classes: ['availability-block'] }, [
-                    element('div', { classes: ['availability-block', 'unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
-                    element('div', { classes: ['availability-block', 'available'], style: `height: ${uptimePercent}%`}, null),
-                    element('div', { classes: ['availability-details'] }, [
-                        element('p', formatted),
-                        element('p', `Uptime: ${uptimePercent}%`),
-                    ])
-                ])
+            .forEach(timestamp => {
+                recent[timestamp] = this.data.fineGrainedData[timestamp]
             })
-    }
-
-    last24Hours(data) {
-        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
-            timeZone: this.timeZone.name,
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit',
-        })
-        return Object.keys(data.summarisedByHour)
-            .sort()
-            .slice(-24)
-            .map(timestamp => {
-                const uptimePercent = this.roundToTwoDp(data.summarisedByHour[timestamp].uptime * 100)
-
-                const asDate = new Date(timestamp)
-                const formattedDateTime = formatter.format(asDate)
-
-                return element('div', { classes: ['availability-block'] }, [
-                    element('div', { classes: ['availability-block', 'unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
-                    element('div', { classes: ['availability-block', 'available'], style: `height: ${uptimePercent}%`}, null),
-                    element('div', { classes: ['availability-details'] }, [
-                        element('p', formattedDateTime),
-                        element('p', `Uptime: ${uptimePercent}%`),
-                    ])
-                ])
-            })
-    }
-
-    lastTwoHours(data) {
-        const formatter = new Intl.DateTimeFormat(undefined /* user agent default*/, {
-            timeZone: this.timeZone.name,
-            hour: 'numeric',
-            minute: '2-digit',
-        })
-        return Object.keys(data.fineGrainedData)
-            .sort()
-            .slice(-24)
-            .map(timestamp => {
-                const asDate = new Date(timestamp)
-                const time = formatter.format(asDate)
-                const status = data.fineGrainedData[timestamp]
-
-                return element('div', { classes: [`availability-block ${status}`]}, [
-                    element('div', { classes: ['availability-details'] }, [
-                        element('p', time),
-                        element('p', status),
-                    ])
-                ])
-            })
-    }
-
-    roundToTwoDp(number) {
-        const times100 = number * 100
-        const rounded = Math.round(times100)
-        return rounded * 0.01
-    }
-
-    dateFromZuluIso8601WithMinutes(input) {
-        const [inputWithoutZ] = input.split('Z')
-        const [date, time] = inputWithoutZ.split('T')
-        const [year, oneBasedMonth, day] = date.split('-')
-        const [hours, minutes] = time.split(':')
-
-        return new Date(year, oneBasedMonth - 1, day, hours, minutes)
+        return recent
     }
 }
 
