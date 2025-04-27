@@ -12,8 +12,8 @@ const commonSummaryFunctions = {
         const formatted = dateFormatter.format(new Date(timestamp))
 
         return element('div', { classes: ['availability-block'] }, [
-            element('div', { classes: ['availability-block', 'unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
-            element('div', { classes: ['availability-block', 'available'], style: `height: ${uptimePercent}%`}, null),
+            element('div', { classes: ['unavailable'], style: `height: ${100 - uptimePercent}%`}, null),
+            element('div', { classes: ['available'], style: `height: ${uptimePercent}%`}, null),
             element('div', { classes: ['availability-details'] }, [
                 element('p', formatted),
                 element('p', `Uptime: ${uptimePercent}%`),
@@ -56,7 +56,8 @@ const lookup = {
             const time = dateFormatter.format(new Date(timestamp))
             const status = data[timestamp]
 
-            return element('div', { classes: [`availability-block ${status}`]}, [
+            return element('div', { classes: [`availability-block`]}, [
+                element('div', { classes: [ status ], style: 'height: 100%;'}, null),
                 element('div', { classes: ['availability-details'] }, [
                     element('p', time),
                     element('p', status),

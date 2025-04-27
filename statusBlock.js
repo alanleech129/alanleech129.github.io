@@ -34,11 +34,11 @@ const STYLE_CONTENT = `
             height: 2em;
             width: 0.5em;
 
-            &.available {
+            .available {
                 background-color: green;
             }
 
-            &.unavailable {
+            .unavailable {
                 background-color: red;
             }
 
@@ -49,7 +49,7 @@ const STYLE_CONTENT = `
             &:hover .availability-details {
                 display: inline-block;
                 position: relative;
-                top: 3em;
+                top: 0.5em;
                 padding: 0.5em;
                 border: solid black 1px;
                 text-wrap-mode: nowrap;
