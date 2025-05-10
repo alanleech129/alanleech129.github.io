@@ -3,6 +3,9 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { normalise } from './normaliseData.mjs'
 import { formatIsoMinutes } from './dateFunctions.mjs'
+
+import eris from './statusProviders/eris.mjs'
+import sedna from './statusProviders/sedna.mjs'
 import statusChecker from './statusProviders/statusChecker.mjs'
 
 async function readCurrentDataFile() {
@@ -21,6 +24,8 @@ async function readCurrentDataFile() {
 async function getStatuses() {
     const statuses = await Promise.all([
         statusChecker(),
+        eris(),
+        sedna(),
     ])
 
     const output = {}

@@ -16,13 +16,23 @@
                 text-align: center;
                 margin-top: 2em;
             }
+
+            .wrapper {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+                justify-items: center;
+            }
         </style>
     </head>
     <body>
         <h1>leech.me.uk Status Page</h1>
 
         <time-zone-selector></time-zone-selector>
-        <status-block name="Status checker"></status-block>
+        <div class="wrapper">
+            <status-block name="Status checker"></status-block>
+            <status-block name="Eris"></status-block>
+            <status-block name="Sedna"></status-block>
+        </div>
 
         <script>
             const statusBlocks = document.querySelectorAll('status-block')
