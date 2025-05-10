@@ -2,7 +2,8 @@
     "Status checker": {
         "fineGrainedData": {
             "2025-05-10T11:05Z": "available",
-            "2025-05-10T11:10Z": "available"
+            "2025-05-10T11:10Z": "available",
+            "2025-05-10T11:15Z": "available"
         },
         "summarisedByHour": {},
         "summarisedByDate": {}
@@ -10,7 +11,8 @@
     "Eris": {
         "fineGrainedData": {
             "2025-05-10T11:05Z": "available",
-            "2025-05-10T11:10Z": "available"
+            "2025-05-10T11:10Z": "available",
+            "2025-05-10T11:15Z": "available"
         },
         "summarisedByHour": {},
         "summarisedByDate": {}
@@ -18,7 +20,8 @@
     "Sedna": {
         "fineGrainedData": {
             "2025-05-10T11:05Z": "available",
-            "2025-05-10T11:10Z": "available"
+            "2025-05-10T11:10Z": "available",
+            "2025-05-10T11:15Z": "available"
         },
         "summarisedByHour": {},
         "summarisedByDate": {}
