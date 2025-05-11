@@ -159,7 +159,8 @@
             "2025-05-11T00:00Z": "available",
             "2025-05-11T00:05Z": "available",
             "2025-05-11T00:10Z": "available",
-            "2025-05-11T00:15Z": "available"
+            "2025-05-11T00:15Z": "available",
+            "2025-05-11T00:20Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T11:00Z": {
@@ -368,7 +369,8 @@
             "2025-05-11T00:00Z": "available",
             "2025-05-11T00:05Z": "available",
             "2025-05-11T00:10Z": "available",
-            "2025-05-11T00:15Z": "available"
+            "2025-05-11T00:15Z": "available",
+            "2025-05-11T00:20Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T11:00Z": {
@@ -577,7 +579,8 @@
             "2025-05-11T00:00Z": "available",
             "2025-05-11T00:05Z": "available",
             "2025-05-11T00:10Z": "available",
-            "2025-05-11T00:15Z": "available"
+            "2025-05-11T00:15Z": "available",
+            "2025-05-11T00:20Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T11:00Z": {
