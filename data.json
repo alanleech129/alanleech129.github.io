@@ -1,7 +1,6 @@
 {
     "Status checker": {
         "fineGrainedData": {
-            "2025-05-10T11:40Z": "available",
             "2025-05-10T11:45Z": "available",
             "2025-05-10T11:50Z": "available",
             "2025-05-10T11:55Z": "available",
@@ -301,7 +300,8 @@
             "2025-05-11T12:25Z": "available",
             "2025-05-11T12:30Z": "available",
             "2025-05-11T12:35Z": "available",
-            "2025-05-11T12:40Z": "available"
+            "2025-05-11T12:40Z": "available",
+            "2025-05-11T12:45Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T12:00Z": {
@@ -385,7 +385,6 @@
     },
     "Eris": {
         "fineGrainedData": {
-            "2025-05-10T11:40Z": "available",
             "2025-05-10T11:45Z": "available",
             "2025-05-10T11:50Z": "available",
             "2025-05-10T11:55Z": "available",
@@ -685,7 +684,8 @@
             "2025-05-11T12:25Z": "available",
             "2025-05-11T12:30Z": "available",
             "2025-05-11T12:35Z": "available",
-            "2025-05-11T12:40Z": "available"
+            "2025-05-11T12:40Z": "available",
+            "2025-05-11T12:45Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T12:00Z": {
@@ -769,7 +769,6 @@
     },
     "Sedna": {
         "fineGrainedData": {
-            "2025-05-10T11:40Z": "available",
             "2025-05-10T11:45Z": "available",
             "2025-05-10T11:50Z": "available",
             "2025-05-10T11:55Z": "available",
@@ -1069,7 +1068,8 @@
             "2025-05-11T12:25Z": "available",
             "2025-05-11T12:30Z": "available",
             "2025-05-11T12:35Z": "available",
-            "2025-05-11T12:40Z": "available"
+            "2025-05-11T12:40Z": "available",
+            "2025-05-11T12:45Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T12:00Z": {
