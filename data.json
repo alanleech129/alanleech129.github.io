@@ -299,7 +299,8 @@
             "2025-05-11T11:40Z": "available",
             "2025-05-11T11:45Z": "available",
             "2025-05-11T11:50Z": "available",
-            "2025-05-11T11:55Z": "available"
+            "2025-05-11T11:55Z": "available",
+            "2025-05-11T12:00Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T11:00Z": {
@@ -372,6 +373,9 @@
                 "uptime": 1
             },
             "2025-05-11T10:00Z": {
+                "uptime": 1
+            },
+            "2025-05-11T11:00Z": {
                 "uptime": 1
             }
         },
@@ -681,7 +685,8 @@
             "2025-05-11T11:40Z": "available",
             "2025-05-11T11:45Z": "available",
             "2025-05-11T11:50Z": "available",
-            "2025-05-11T11:55Z": "available"
+            "2025-05-11T11:55Z": "available",
+            "2025-05-11T12:00Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T11:00Z": {
@@ -754,6 +759,9 @@
                 "uptime": 1
             },
             "2025-05-11T10:00Z": {
+                "uptime": 1
+            },
+            "2025-05-11T11:00Z": {
                 "uptime": 1
             }
         },
@@ -1063,7 +1071,8 @@
             "2025-05-11T11:40Z": "available",
             "2025-05-11T11:45Z": "available",
             "2025-05-11T11:50Z": "available",
-            "2025-05-11T11:55Z": "available"
+            "2025-05-11T11:55Z": "available",
+            "2025-05-11T12:00Z": "available"
         },
         "summarisedByHour": {
             "2025-05-10T11:00Z": {
@@ -1136,6 +1145,9 @@
                 "uptime": 1
             },
             "2025-05-11T10:00Z": {
+                "uptime": 1
+            },
+            "2025-05-11T11:00Z": {
                 "uptime": 1
             }
         },
