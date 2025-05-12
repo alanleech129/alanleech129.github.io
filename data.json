@@ -1,7 +1,6 @@
 {
     "Status checker": {
         "fineGrainedData": {
-            "2025-05-11T03:55Z": "available",
             "2025-05-11T04:00Z": "available",
             "2025-05-11T04:05Z": "available",
             "2025-05-11T04:10Z": "available",
@@ -301,7 +300,8 @@
             "2025-05-12T04:40Z": "available",
             "2025-05-12T04:45Z": "available",
             "2025-05-12T04:50Z": "available",
-            "2025-05-12T04:55Z": "available"
+            "2025-05-12T04:55Z": "available",
+            "2025-05-12T05:00Z": "available"
         },
         "summarisedByHour": {
             "2025-05-11T04:00Z": {
@@ -374,6 +374,9 @@
                 "uptime": 1
             },
             "2025-05-12T03:00Z": {
+                "uptime": 1
+            },
+            "2025-05-12T04:00Z": {
                 "uptime": 1
             }
         },
@@ -388,7 +391,6 @@
     },
     "Eris": {
         "fineGrainedData": {
-            "2025-05-11T03:55Z": "available",
             "2025-05-11T04:00Z": "available",
             "2025-05-11T04:05Z": "available",
             "2025-05-11T04:10Z": "available",
@@ -688,7 +690,8 @@
             "2025-05-12T04:40Z": "available",
             "2025-05-12T04:45Z": "available",
             "2025-05-12T04:50Z": "available",
-            "2025-05-12T04:55Z": "available"
+            "2025-05-12T04:55Z": "available",
+            "2025-05-12T05:00Z": "available"
         },
         "summarisedByHour": {
             "2025-05-11T04:00Z": {
@@ -761,6 +764,9 @@
                 "uptime": 1
             },
             "2025-05-12T03:00Z": {
+                "uptime": 1
+            },
+            "2025-05-12T04:00Z": {
                 "uptime": 1
             }
         },
@@ -775,7 +781,6 @@
     },
     "Sedna": {
         "fineGrainedData": {
-            "2025-05-11T03:55Z": "available",
             "2025-05-11T04:00Z": "available",
             "2025-05-11T04:05Z": "available",
             "2025-05-11T04:10Z": "available",
@@ -1075,7 +1080,8 @@
             "2025-05-12T04:40Z": "available",
             "2025-05-12T04:45Z": "available",
             "2025-05-12T04:50Z": "available",
-            "2025-05-12T04:55Z": "available"
+            "2025-05-12T04:55Z": "available",
+            "2025-05-12T05:00Z": "available"
         },
         "summarisedByHour": {
             "2025-05-11T04:00Z": {
@@ -1148,6 +1154,9 @@
                 "uptime": 1
             },
             "2025-05-12T03:00Z": {
+                "uptime": 1
+            },
+            "2025-05-12T04:00Z": {
                 "uptime": 1
             }
         },
