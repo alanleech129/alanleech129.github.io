@@ -1,6 +1,8 @@
 import { normalise } from './normaliseData.mjs'
 
 const dataQueue = []
+let fetchDataCallbackId
+let expectedCallbackTime = 0
 
 async function fetchData() {
     enqueueNextFetchCall()
@@ -22,9 +24,27 @@ function enqueueNextFetchCall() {
     const timeToNextRound5Minutes = 300000 - millisSinceLastRound5Minutes
     const plusTimeForGithubToBeUpdated = timeToNextRound5Minutes + 60000
 
-    setTimeout(() => fetchData(), plusTimeForGithubToBeUpdated)
+    const now = new Date().valueOf()
+    expectedCallbackTime = now + plusTimeForGithubToBeUpdated
+
+    if (fetchDataCallbackId) {
+        clearTimeout(fetchDataCallbackId)
+    }
+    fetchDataCallbackId = setTimeout(() => fetchData(), plusTimeForGithubToBeUpdated)
+}
+
+function fetchDataIfStale() {
+    const now = new Date().valueOf()
+    if (now > expectedCallbackTime) {
+        fetchData()
+    }
 }
 
 fetchData()
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        fetchDataIfStale()
+    }
+})
 
 export { onData }
