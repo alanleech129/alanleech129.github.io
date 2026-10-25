@@ -2,7 +2,6 @@
     "Status checker": {
         "fineGrainedData": {
             "2026-10-24T20:45Z": "available",
-            "2026-10-24T20:00Z": "unavailable",
             "2026-10-24T20:05Z": "unavailable",
             "2026-10-24T20:10Z": "unavailable",
             "2026-10-24T20:15Z": "unavailable",
@@ -301,12 +300,10 @@
             "2026-10-25T20:45Z": "available",
             "2026-10-25T20:50Z": "available",
             "2026-10-25T20:55Z": "available",
-            "2026-10-25T21:00Z": "available"
+            "2026-10-25T21:00Z": "available",
+            "2026-10-25T21:05Z": "available"
         },
         "summarisedByHour": {
-            "2026-10-24T20:00Z": {
-                "uptime": 0.25
-            },
             "2026-10-24T21:00Z": {
                 "uptime": 1
             },
@@ -458,7 +455,6 @@
     "Eris": {
         "fineGrainedData": {
             "2026-10-24T20:45Z": "available",
-            "2026-10-24T20:00Z": "unavailable",
             "2026-10-24T20:05Z": "unavailable",
             "2026-10-24T20:10Z": "unavailable",
             "2026-10-24T20:15Z": "unavailable",
@@ -757,12 +753,10 @@
             "2026-10-25T20:45Z": "available",
             "2026-10-25T20:50Z": "available",
             "2026-10-25T20:55Z": "available",
-            "2026-10-25T21:00Z": "available"
+            "2026-10-25T21:00Z": "available",
+            "2026-10-25T21:05Z": "available"
         },
         "summarisedByHour": {
-            "2026-10-24T20:00Z": {
-                "uptime": 0.25
-            },
             "2026-10-24T21:00Z": {
                 "uptime": 1
             },
@@ -914,7 +908,6 @@
     "Sedna": {
         "fineGrainedData": {
             "2026-10-24T20:45Z": "available",
-            "2026-10-24T20:00Z": "unavailable",
             "2026-10-24T20:05Z": "unavailable",
             "2026-10-24T20:10Z": "unavailable",
             "2026-10-24T20:15Z": "unavailable",
@@ -1213,12 +1206,10 @@
             "2026-10-25T20:45Z": "available",
             "2026-10-25T20:50Z": "available",
             "2026-10-25T20:55Z": "available",
-            "2026-10-25T21:00Z": "available"
+            "2026-10-25T21:00Z": "available",
+            "2026-10-25T21:05Z": "available"
         },
         "summarisedByHour": {
-            "2026-10-24T20:00Z": {
-                "uptime": 0.25
-            },
             "2026-10-24T21:00Z": {
                 "uptime": 1
             },
